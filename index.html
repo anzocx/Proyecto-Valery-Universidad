@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#17243b">
+    <meta name="description" content="Portal web de gestión de clientes, precios y cuentas por cobrar.">
+    <title>Valery | Portal de gestión</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#inicio" aria-label="Valery, inicio">
+          <span class="brand-mark">V</span>
+          <span>valery <span class="brand-light">portal</span></span>
+        </a>
+        <p class="sidebar-label">GESTIÓN</p>
+        <nav class="main-nav" aria-label="Módulos del portal">
+          <button class="nav-link active" type="button" data-view="clientes"><span class="nav-icon">▦</span>Clientes</button>
+          <button class="nav-link" type="button" data-view="precios"><span class="nav-icon">↗</span>Ajustes de precios</button>
+          <button class="nav-link" type="button" data-view="deudas"><span class="nav-icon">$</span>Cuentas por cobrar</button>
+        </nav>
+        <div class="sidebar-note"><span class="online-dot"></span><span><strong>Portal de gestión</strong><small>Información de la API</small></span></div>
+        <p class="sidebar-footer">Módulo complementario<br>Valery Software</p>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <p class="breadcrumb">Portal <span>/</span> <strong id="breadcrumb-title">Clientes</strong></p>
+          <span class="account-chip"><span class="avatar">VC</span>Administración</span>
+        </header>
+        <div id="page-content" aria-live="polite"></div>
+      </main>
+    </div>
+
+    <dialog class="modal" id="client-dialog" aria-labelledby="client-dialog-title">
+      <form id="client-form" novalidate>
+        <header class="modal-heading">
+          <div><p class="eyebrow" id="client-dialog-eyebrow">NUEVO REGISTRO</p><h2 id="client-dialog-title">Registrar cliente</h2></div>
+          <button class="modal-close" type="button" data-close-dialog aria-label="Cerrar">×</button>
+        </header>
+        <div class="form-grid">
+          <label class="form-field">Cédula / RIF <span class="required-mark">*</span>
+            <input name="cedula_rif" placeholder="V-12345678" maxlength="20" required>
+            <small class="field-error" data-error-for="cedula_rif"></small>
+          </label>
+          <label class="form-field">Nombre / razón social <span class="required-mark">*</span>
+            <input name="nombre_razon_social" maxlength="180" required>
+            <small class="field-error" data-error-for="nombre_razon_social"></small>
+          </label>
+          <label class="form-field">Teléfono <span class="required-mark">*</span>
+            <input name="telefono" placeholder="+58 412 123 4567" maxlength="30" required>
+            <small class="field-error" data-error-for="telefono"></small>
+          </label>
+          <label class="form-field">Límite de crédito (VES) <span class="required-mark">*</span>
+            <input name="limite_credito" type="number" min="0" step="0.01" value="0" required>
+            <small class="field-error" data-error-for="limite_credito"></small>
+          </label>
+          <label class="form-field">Días de crédito <span class="required-mark">*</span>
+            <input name="dias_credito_otorgados" type="number" min="0" max="3650" step="1" value="0" required>
+            <small class="field-error" data-error-for="dias_credito_otorgados"></small>
+          </label>
+          <label class="form-field full-width">Dirección <span class="required-mark">*</span>
+            <textarea name="direccion" rows="3" maxlength="2000" required></textarea>
+            <small class="field-error" data-error-for="direccion"></small>
+          </label>
+        </div>
+        <p class="form-error" id="client-form-error" role="alert"></p>
+        <footer class="modal-actions">
+          <button class="button button-secondary" type="button" data-close-dialog>Cancelar</button>
+          <button class="button button-primary" type="submit" id="client-submit">Crear cliente</button>
+        </footer>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </body>
+</html>
